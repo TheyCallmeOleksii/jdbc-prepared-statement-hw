@@ -26,7 +26,6 @@ public class DatabaseQueryService {
 
         try {
             Connection connection = Database.getInstance().getConnection();
-            // Використовуємо PreparedStatement
             try (PreparedStatement pstmt = connection.prepareStatement(sql);
                  ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
