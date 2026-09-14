@@ -2,9 +2,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +26,9 @@ public class DatabaseQueryService {
 
         try {
             Connection connection = Database.getInstance().getConnection();
-            try (Statement statement = connection.createStatement();
-                 ResultSet rs = statement.executeQuery(sql)) {
+            // Використовуємо PreparedStatement
+            try (PreparedStatement pstmt = connection.prepareStatement(sql);
+                 ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     String name = rs.getString("NAME");
                     int count = rs.getInt("PROJECT_COUNT");
@@ -46,8 +47,8 @@ public class DatabaseQueryService {
 
         try {
             Connection connection = Database.getInstance().getConnection();
-            try (Statement statement = connection.createStatement();
-                 ResultSet rs = statement.executeQuery(sql)) {
+            try (PreparedStatement pstmt = connection.prepareStatement(sql);
+                 ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     String name = rs.getString("NAME");
                     int monthCount = rs.getInt("MONTH_COUNT");
@@ -66,8 +67,8 @@ public class DatabaseQueryService {
 
         try {
             Connection connection = Database.getInstance().getConnection();
-            try (Statement statement = connection.createStatement();
-                 ResultSet rs = statement.executeQuery(sql)) {
+            try (PreparedStatement pstmt = connection.prepareStatement(sql);
+                 ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     String name = rs.getString("NAME");
                     int salary = rs.getInt("SALARY");
@@ -86,8 +87,8 @@ public class DatabaseQueryService {
 
         try {
             Connection connection = Database.getInstance().getConnection();
-            try (Statement statement = connection.createStatement();
-                 ResultSet rs = statement.executeQuery(sql)) {
+            try (PreparedStatement pstmt = connection.prepareStatement(sql);
+                 ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     String type = rs.getString("TYPE");
                     String name = rs.getString("NAME");
@@ -107,8 +108,8 @@ public class DatabaseQueryService {
 
         try {
             Connection connection = Database.getInstance().getConnection();
-            try (Statement statement = connection.createStatement();
-                 ResultSet rs = statement.executeQuery(sql)) {
+            try (PreparedStatement pstmt = connection.prepareStatement(sql);
+                 ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     String name = rs.getString("NAME");
                     int price = rs.getInt("PRICE");
